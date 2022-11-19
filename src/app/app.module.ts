@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { PokemonsModule } from "./pokemons/pokemons.module";
 import { PokemonModule } from "./pokemon/pokemon.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PokemonModule } from "./pokemon/pokemon.module";
     PokemonsModule,
     PokemonModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
