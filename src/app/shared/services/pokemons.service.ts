@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { BehaviorSubject, catchError, EMPTY } from 'rxjs';
-import { PokemonResponce } from "../models/pokemonResponce.models";
+import { PokemonResponce } from "../../pokemons/models/pokemonResponce.models";
 import { environment } from 'src/environments/environment';
-import { PokemonSpecies } from "../models/pokemonSpecies.models";
+import { PokemonSpecies } from "../../pokemons/models/pokemonSpecies.models";
 
 @Injectable()
 export class PokemonsService {
