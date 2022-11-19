@@ -1,6 +1,6 @@
 <p>pokemons works!</p>
 <div *ngIf="pokemons$ | async as pokemons">
-  <div *ngFor="let pokemon of pokemons">
+  <div *ngFor="let pokemon of pokemons" routerLink="/pokemon">
     {{pokemon.name }}
   </div>
 </div>
