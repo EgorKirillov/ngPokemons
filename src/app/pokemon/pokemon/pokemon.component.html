@@ -1,2 +1,10 @@
 <p>pokemon works!</p>
 {{id}}
+<div *ngIf="pokemon$ | async as pokemon" >
+<div>id:{{pokemon.id}}</div>
+<div>base_experience:{{pokemon.base_experience}}</div>
+<div>height:{{pokemon.height}}</div>
+  <div><img [src]="pokemon.sprites.other['official-artwork'].front_default" alt="pokemon img"></div>
+<div>url{{pokemon.sprites.other["official-artwork"].front_default}}</div>
+
+</div>

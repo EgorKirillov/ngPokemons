@@ -16,8 +16,6 @@ export class PokemonsComponent implements OnInit {
   constructor(private pokemonsService: PokemonsService) {  }
 
   ngOnInit(): void {
-    this.pokemons$ = this.pokemonsService.PokemonSpecies$
+    this.pokemons$ = this.pokemonsService.pokemonSpecies$
   }
-
-
 }

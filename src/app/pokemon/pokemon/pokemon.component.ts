@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
+import { Pokemon } from "../../shared/models/pokemon.models";
+import { PokemonsService } from "../../shared/services/pokemons.service";
 
 @Component({
   selector: 'pk-pokemon',
@@ -11,17 +13,22 @@ export class PokemonComponent implements OnInit, OnDestroy {
 
   private routeSub?: Subscription;
   id?:string
-  constructor(private router:ActivatedRoute ) { }
+  pokemon$!: Observable<Pokemon | null>
+
+  constructor(private router:ActivatedRoute, private pokemonsService: PokemonsService ) { }
 
   ngOnInit(): void {
     console.log(this.router)
     this.routeSub=this.router.params.subscribe(params=> {
       this.id = params['id']
     })
+    this.pokemonsService.getPokemon(this.id)
+    this.pokemon$ = this.pokemonsService.pokemon$
   }
 
   ngOnDestroy(): void {
     this.routeSub?.unsubscribe()
+    this.pokemonsService.resetPokemon()
   }
 
 }
