@@ -19,6 +19,7 @@ export class PokemonComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log(this.router)
+    // this.id = this.router.snapshot.data['id'] //
     this.routeSub=this.router.params.subscribe(params=> {
       this.id = params['id']
     })
