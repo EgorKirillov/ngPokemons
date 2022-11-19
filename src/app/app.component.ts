@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PokemonsService } from "./pokemons/services/pokemons.service";
+import { PokemonsService } from "./shared/services/pokemons.service";
 
 @Component({
   selector: 'pk-root',
