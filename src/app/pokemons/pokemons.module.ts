@@ -6,17 +6,20 @@ import { PokemonsRoutingModule } from "./pokemons-routing.module";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatTableModule } from "@angular/material/table";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
+import { MatCardModule } from "@angular/material/card";
 
 
 @NgModule({
   declarations: [
-    PokemonsComponent
+    PokemonsComponent,
+    PokemonCardComponent
   ],
   exports: [
     PokemonsComponent
   ],
   imports: [
-    CommonModule, PokemonsRoutingModule, MatPaginatorModule, MatTableModule, MatProgressBarModule
+    CommonModule, PokemonsRoutingModule, MatPaginatorModule, MatTableModule, MatProgressBarModule, MatCardModule
   ],
   providers: [
     PokemonsService
