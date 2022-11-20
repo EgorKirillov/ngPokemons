@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Pokemon, PokemonType } from "../../shared/models/pokemon.models";
 
 @Component({
   selector: 'pk-pokemon-card',
@@ -6,13 +7,17 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./pokemon-card.component.scss']
 })
 export class PokemonCardComponent implements OnInit {
-  @Input() imgSrc: string | null = null;
-  @Input() pokemonName: string | null = null;
-  @Input() pokemonType: string | null = null;
 
+  @Input() pokemon!: Pokemon
+  types:string =""
   constructor() { }
 
+  getTypes(pokemonTypes: PokemonType[]): string {
+    return pokemonTypes.map(t=>t.type.name).join(' ')
+  }
+
   ngOnInit(): void {
+    this.types=this.getTypes(this.pokemon.types)
   }
 
 }

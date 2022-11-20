@@ -1,7 +1,15 @@
 .card {
-  min-width: 150px;
-  max-width: 400px;
+  min-width: 100px;
+  max-width: 300px;
   padding: 10px;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
+mat-card-actions {
+  button {
+    margin-bottom: 10px;
+  }
+}
+//mat-card-header img:hover {
+//  cursor: pointer;
+//}

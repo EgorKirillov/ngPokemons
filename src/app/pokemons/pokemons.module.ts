@@ -8,6 +8,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
 import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
 
 
 @NgModule({
@@ -19,7 +20,13 @@ import { MatCardModule } from "@angular/material/card";
     PokemonsComponent
   ],
   imports: [
-    CommonModule, PokemonsRoutingModule, MatPaginatorModule, MatTableModule, MatProgressBarModule, MatCardModule
+    CommonModule,
+    PokemonsRoutingModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [
     PokemonsService
