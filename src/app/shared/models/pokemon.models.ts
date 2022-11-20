@@ -1,6 +1,14 @@
 import { PokemonSpecies } from "./pokemonSpecies.models";
 import { PokemonSprites } from "./pokemonSprites.models";
 
+export interface PokemonType {
+  slot: number
+  type: {
+    id: number
+    name: string
+  }
+}
+
 export interface Pokemon {
   id: number
   name: string
@@ -15,9 +23,9 @@ export interface Pokemon {
   // held_items: PokemonHeldItem[]
   location_area_encounters: string
   // moves: PokemonMove[]
-  species:PokemonSpecies
+  species: PokemonSpecies
   sprites: PokemonSprites
   // stats: PokemonStat[]
-  // types: PokemonType[]
+  types: PokemonType[]
   // past_types: PokemonTypePast[]
 }
