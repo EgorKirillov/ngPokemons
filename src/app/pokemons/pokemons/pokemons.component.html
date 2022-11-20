@@ -4,3 +4,17 @@
     <a [routerLink]='pokemon.name'>{{pokemon.name }}</a>
   </div>
 </div>
+<mat-paginator
+  (page)="handlePageEvent($event)"
+  class="mat-paginator"
+  [pageSize]="pokemonPageSize$ | async"
+  [pageSizeOptions]="pageSizeOptions"
+  [length]="pokemonsCount$ | async"
+  [pageIndex]="pokemonPageIndex$ | async"
+  showFirstLastButtons
+  [disabled]="isLoading$ | async"
+
+
+
+>
+</mat-paginator>
