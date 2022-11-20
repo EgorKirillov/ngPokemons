@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PokemonSpecies } from "../../shared/models/pokemonSpecies.models";
-import { Observable, Subscription } from "rxjs";
+import { Observable } from "rxjs";
 import { PokemonsService } from "../../shared/services/pokemons.service";
 import { PageEvent } from "@angular/material/paginator";
+import { Pokemon } from 'src/app/shared/models/pokemon.models';
+import { QueryParams } from "../../shared/models/queryParams.models";
 
 @Component({
   selector: 'pk-pokemons',
@@ -11,35 +12,31 @@ import { PageEvent } from "@angular/material/paginator";
 })
 export class PokemonsComponent implements OnInit {
 
-  pokemonsSubscr!: Subscription
-  pokemons$!: Observable<PokemonSpecies[]>
+  pokemons$!: Observable<Pokemon[]>
   pokemonsCount$!: Observable<number>
   pokemonPageSize$!: Observable<number>
-  pokemonPageIndex$!:Observable<number>
-  isLoading$!:Observable<boolean>
+  pokemonPageIndex$!: Observable<number>
+  isLoading$!: Observable<boolean>
 
-  pageSizeOptions = [5, 10, 20 , 50];
+  pageSizeOptions = [5, 10, 20, 50];
   showFirstLastButtons = true;
 
 
-  handlePageEvent (event: PageEvent) {
-
-    this.pokemonsService.getPokemons({limit: event.pageSize, offset: event.pageIndex * event.pageSize})
-    console.log(event)
-    // this.length = event.length;
-    // this.pageSize = event.pageSize;
-    // this.pageIndex = event.pageIndex;
+  handlePageEvent(event: PageEvent) {
+    const params: QueryParams = {limit: event.pageSize, offset: event.pageIndex * event.pageSize}
+    this.pokemonsService.getPokemons(params)
   }
 
   constructor(private pokemonsService: PokemonsService) {
-  }
+    this.pokemonPageIndex$ = this.pokemonsService.pokemonPageIndex$  }
 
   ngOnInit(): void {
-    this.pokemons$ = this.pokemonsService.pokemonSpecies$
+    this.pokemons$ = this.pokemonsService.pokemons$
+
     this.pokemonsCount$ = this.pokemonsService.pokemonCount$
     this.pokemonPageSize$ = this.pokemonsService.pokemonPageSize$
-    this.pokemonPageIndex$ = this.pokemonsService.pokemonPageIndex$
-    this.isLoading$ =this.pokemonsService.isLoading$
+
+    this.isLoading$ = this.pokemonsService.isLoading$
 
   }
 }

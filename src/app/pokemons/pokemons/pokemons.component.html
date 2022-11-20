@@ -1,12 +1,12 @@
-<p>pokemons works!</p>
+
 <div *ngIf="pokemons$ | async as pokemons" class="card-container">
 
   <div *ngFor="let pokemon of pokemons" >
-    <pk-pokemon-card [imgSrc]="null" [pokemonName]="pokemon.name" [pokemonType]="null" ></pk-pokemon-card>
-    <a [routerLink]='pokemon.name'>{{pokemon.name}}</a>
+    <pk-pokemon-card [pokemon]="pokemon"></pk-pokemon-card>
   </div>
 
 </div>
+
 <mat-paginator
   (page)="handlePageEvent($event)"
   class="mat-paginator"
@@ -16,8 +16,5 @@
   [pageIndex]="pokemonPageIndex$ | async"
   showFirstLastButtons
   [disabled]="isLoading$ | async"
-
-
-
 >
 </mat-paginator>
