@@ -5,6 +5,7 @@ import { PokemonResponce } from "../models/pokemonResponce.models";
 import { environment } from 'src/environments/environment';
 import { Pokemon } from "../models/pokemon.models";
 import { QueryParams } from "../models/queryParams.models";
+import { ActivatedRoute } from "@angular/router";
 
 @Injectable()
 export class PokemonsService {
@@ -15,9 +16,11 @@ export class PokemonsService {
   pokemonCount$ = new BehaviorSubject<number>(0)
 
   pokemonPageSize$ = new BehaviorSubject<number>(20)
-  pokemonPageIndex$ = new BehaviorSubject<number>(1)
+  pokemonPageIndex$ = new BehaviorSubject<number>(0)
   isLoading$ = new BehaviorSubject<boolean>(false)
 
+  constructor(private http: HttpClient, private router: ActivatedRoute) {
+  }
 
   getPokemons(params: QueryParams = {}) {
     this._pokemons = []
@@ -26,22 +29,26 @@ export class PokemonsService {
     this.http
       .get<PokemonResponce>(`${environment.baseUrl}pokemon`, {params: {...params}})
       .pipe(
-
         catchError(PokemonsService.errorHandler.bind(this)),
-
         tap((res) => {
-          res.results.forEach((pokemon)=>{this._addPokemon(pokemon.url)})
+          res.results.forEach((pokemon) => {
+            this._addPokemon(pokemon.url)
+          })
+          this.pokemonCount$.next(res.count)
+          // const pageSize = params.limit ?? 20
+          // const pageIndex = (params.offset && params.limit)
+          //   ? Math.ceil(params.offset / params.limit)
+          //   : 0
+          // this.pokemonPageIndex$.next(pageIndex)
+          // this.pokemonPageSize$.next(pageSize)
         }),
-      )
+        // map(res => res.results.map(pok => this._addPokemon1(pok.url)))
 
-      .subscribe(res => {
-        const pageSize = params.limit ?? 20
-        const pageIndex = (params.offset && params.limit) ? params.offset / params.limit : 0
-        this.pokemonCount$.next(res.count)
-        this.pokemonPageIndex$.next(pageIndex)
-        this.pokemonPageSize$.next(pageSize)
+      )
+      .subscribe((res) => {
         this.isLoading$.next(false)
         this.pokemons$.next(this._pokemons)
+
       })
   }
 
@@ -74,6 +81,4 @@ export class PokemonsService {
   }
 
 
-  constructor(private http: HttpClient) {
-  }
 }

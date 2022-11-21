@@ -11,6 +11,5 @@ export class AppComponent implements OnInit{
   constructor(private pokemonsService:PokemonsService) {  }
 
   ngOnInit(): void {
-    this.pokemonsService.getPokemons()
   }
 }
