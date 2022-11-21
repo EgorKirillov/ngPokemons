@@ -1,10 +1,33 @@
-<p>pokemon works!</p>
-{{id}}
-<div *ngIf="pokemon$ | async as pokemon" >
-<div>id:{{pokemon.id}}</div>
-<div>base_experience:{{pokemon.base_experience}}</div>
-<div>height:{{pokemon.height}}</div>
-  <div><img [src]="pokemon.sprites.other['official-artwork'].front_default" alt="pokemon img"></div>
-<div>url{{pokemon.sprites.other["official-artwork"].front_default}}</div>
+<div *ngIf="pokemon$ | async as pokemon">
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image">
+        <img [src]="pokemon.sprites.front_shiny ?? pokemon.sprites.other['official-artwork'].front_default" [alt]="pokemon.name" width="100%">
+      </div>
+
+      <mat-card-title>{{pokemon.name.toUpperCase()}}</mat-card-title>
+
+      <mat-card-subtitle>pokemon ID: {{pokemon.id}}</mat-card-subtitle>
+      <mat-card-subtitle>height: {{pokemon.height * 10}} sm; weight: {{pokemon.weight / 10}} kg</mat-card-subtitle>
+
+    </mat-card-header>
+
+    <img mat-card-image class="mainImage" [src]="pokemon.sprites.other['official-artwork'].front_default" [alt]="pokemon.name">
+    <div>Experience:{{pokemon.base_experience}}</div>
+
+    <mat-card-content>
+
+      <div>Pokemon stats:</div>
+
+      <div *ngFor="let stat of pokemon.stats">
+        {{stat.stat.name}} : {{stat.base_stat}}
+      </div>
+
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button>add/remove</button>
+    </mat-card-actions>
+  </mat-card>
 
 </div>

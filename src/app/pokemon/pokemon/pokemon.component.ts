@@ -25,6 +25,7 @@ export class PokemonComponent implements OnInit, OnDestroy {
     })
     this.pokemonsService.getPokemon(this.id)
     this.pokemon$ = this.pokemonsService.pokemon$
+
   }
 
   ngOnDestroy(): void {

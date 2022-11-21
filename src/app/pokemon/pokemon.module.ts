@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { PokemonComponent } from './pokemon/pokemon.component';
 import { PokemonRoutingModule } from "./pokemon-routing.module";
 import { PokemonsService } from "../shared/services/pokemons.service";
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
 
 
 
@@ -15,7 +17,9 @@ import { PokemonsService } from "../shared/services/pokemons.service";
   ],
   imports: [
     CommonModule,
-    PokemonRoutingModule
+    PokemonRoutingModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [
     PokemonsService

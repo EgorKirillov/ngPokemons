@@ -9,6 +9,13 @@ export interface PokemonType {
   }
 }
 
+export interface PokemonStat {
+  "base_stat": number
+  "stat": {
+    "name": "hp",
+  }
+}
+
 export interface Pokemon {
   id: number
   name: string
@@ -25,7 +32,7 @@ export interface Pokemon {
   // moves: PokemonMove[]
   species: PokemonSpecies
   sprites: PokemonSprites
-  // stats: PokemonStat[]
+  stats: PokemonStat[]
   types: PokemonType[]
   // past_types: PokemonTypePast[]
 }
