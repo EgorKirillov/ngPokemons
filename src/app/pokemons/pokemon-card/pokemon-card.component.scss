@@ -5,6 +5,11 @@
   margin-top: 20px;
   margin-left: 20px;
 }
+mat-card-title {
+  span{
+    font-weight: 300;
+  }
+}
 mat-card-actions {
   button {
     margin-bottom: 10px;
