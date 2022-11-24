@@ -24,7 +24,6 @@ export class PokemonsComponent implements OnInit, OnDestroy {
   isLoading$!: Observable<boolean>
 
   pageSizeOptions = [5, 10, 20, 50];
-  showFirstLastButtons = true;
 
 
   handlePageEvent(event: PageEvent) {

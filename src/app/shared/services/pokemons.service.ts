@@ -1,26 +1,46 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { BehaviorSubject, catchError, EMPTY, tap } from 'rxjs';
-import { PokemonResponce } from "../models/pokemonResponce.models";
-import { environment } from 'src/environments/environment';
-import { Pokemon } from "../models/pokemon.models";
-import { QueryParams } from "../models/queryParams.models";
-import { ActivatedRoute } from "@angular/router";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {BehaviorSubject, catchError, EMPTY, tap} from 'rxjs';
+import {PokemonResponce} from "../models/pokemonResponce.models";
+import {environment} from 'src/environments/environment';
+import {Pokemon} from "../models/pokemon.models";
+import {QueryParams} from "../models/queryParams.models";
 
 @Injectable()
 export class PokemonsService {
 
-  pokemons$ = new BehaviorSubject<Pokemon[]>([])
+  //p
   pokemon$ = new BehaviorSubject<Pokemon | null>(null)
-  _pokemons: Pokemon[] = []
+  //paginator
   pokemonCount$ = new BehaviorSubject<number>(0)
-
   pokemonPageSize$ = new BehaviorSubject<number>(20)
   pokemonPageIndex$ = new BehaviorSubject<number>(0)
+
+//ps
+  pokemons$ = new BehaviorSubject<Pokemon[]>([])
+  _pokemons: Pokemon[] = []
   isLoading$ = new BehaviorSubject<boolean>(false)
 
-  constructor(private http: HttpClient, private router: ActivatedRoute) {
+  constructor(private http: HttpClient) {
   }
+
+  //p
+  //https://pokeapi.co/api/v2/pokemon/{id or name}/
+  getPokemon(id: string = '') {
+    this.http
+      .get<Pokemon>(`${environment.baseUrl}pokemon/${id}`)
+      .pipe(catchError(PokemonsService.errorHandler.bind(this)))
+      .subscribe(res => {
+        this.pokemon$.next(res)
+      })
+  }
+
+  resetPokemon() {
+    this.pokemon$.next(null)
+  }
+  //ps
+
+
 
   getPokemons(params: QueryParams = {}) {
     this._pokemons = []
@@ -52,15 +72,6 @@ export class PokemonsService {
       })
   }
 
-  //https://pokeapi.co/api/v2/pokemon/{id or name}/
-  getPokemon(id: string = '') {
-    this.http
-      .get<Pokemon>(`${environment.baseUrl}pokemon/${id}`)
-      .pipe(catchError(PokemonsService.errorHandler.bind(this)))
-      .subscribe(res => {
-        this.pokemon$.next(res)
-      })
-  }
 
   _addPokemon(url: string) {
     this.http
@@ -71,9 +82,7 @@ export class PokemonsService {
       })
   }
 
-  resetPokemon() {
-    this.pokemon$.next(null)
-  }
+
 
   private static errorHandler(err: HttpErrorResponse) {
     console.log(err.message, 'error')
