@@ -10,6 +10,7 @@
 
 
   <mat-card-actions>
-    <button mat-stroked-button>add to pokedox</button>
+    <button *ngIf="inPokedox" mat-stroked-button (click)="removeFromPokedox(pokemon.id)">remove </button>
+    <button *ngIf="!inPokedox" mat-button (click)="addToPokedox(pokemon.id)">add</button>
   </mat-card-actions>
 </mat-card>

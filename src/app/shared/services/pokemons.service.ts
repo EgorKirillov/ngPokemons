@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {BehaviorSubject, catchError, EMPTY, tap} from 'rxjs';
+import {BehaviorSubject, catchError, EMPTY, map, Observable, tap} from 'rxjs';
 import {PokemonResponce} from "../models/pokemonResponce.models";
 import {environment} from 'src/environments/environment';
 import {Pokemon} from "../models/pokemon.models";
@@ -19,6 +19,8 @@ export class PokemonsService {
 //ps
   pokemons$ = new BehaviorSubject<Pokemon[]>([])
   _pokemons: Pokemon[] = []
+
+  //core
   isLoading$ = new BehaviorSubject<boolean>(false)
 
   constructor(private http: HttpClient) {
@@ -38,10 +40,8 @@ export class PokemonsService {
   resetPokemon() {
     this.pokemon$.next(null)
   }
+
   //ps
-
-
-
   getPokemons(params: QueryParams = {}) {
     this._pokemons = []
     this.pokemons$.next([])
@@ -51,19 +51,15 @@ export class PokemonsService {
       .pipe(
         catchError(PokemonsService.errorHandler.bind(this)),
         tap((res) => {
-          res.results.forEach((pokemon) => {
-            this._addPokemon(pokemon.url)
-          })
           this.pokemonCount$.next(res.count)
-          // const pageSize = params.limit ?? 20
-          // const pageIndex = (params.offset && params.limit)
-          //   ? Math.ceil(params.offset / params.limit)
-          //   : 0
-          // this.pokemonPageIndex$.next(pageIndex)
-          // this.pokemonPageSize$.next(pageSize)
+          const pageSize = params.limit ?? 20
+          const pageIndex = (params.offset && params.limit)
+            ? Math.ceil(params.offset / params.limit)
+            : 0
+          this.pokemonPageIndex$.next(pageIndex)
+          this.pokemonPageSize$.next(pageSize)
         }),
-        // map(res => res.results.map(pok => this._addPokemon1(pok.url)))
-
+        map(res => res.results.map(pok => this._addPokemon(pok.url)))
       )
       .subscribe((res) => {
         this.isLoading$.next(false)
@@ -71,7 +67,6 @@ export class PokemonsService {
 
       })
   }
-
 
   _addPokemon(url: string) {
     this.http
@@ -82,6 +77,14 @@ export class PokemonsService {
       })
   }
 
+//pokedox
+  getPokemonById (id: number[]):Observable<Pokemon>[] {
+    const result = []
+    for (let i = 0; i < id.length; i++) {
+      result.push(this.http.get<Pokemon>(`${environment.baseUrl}pokemon/${id[i]}`))
+    }
+   return result
+  }
 
 
   private static errorHandler(err: HttpErrorResponse) {

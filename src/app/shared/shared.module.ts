@@ -6,6 +6,7 @@ import {RouterLinkActive, RouterLinkWithHref} from "@angular/router";
 import { HeaderComponent } from './components/header/header.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -20,6 +21,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     ReactiveFormsModule,
     RouterLinkActive,
+    MatButtonModule,
 
   ]
 })

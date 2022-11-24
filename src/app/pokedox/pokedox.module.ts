@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PokedoxComponent } from './components/pokedox/pokedox.component';
 import {PokedoxRoutingModule} from "./pokedox-routing.module";
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -11,7 +12,8 @@ import {PokedoxRoutingModule} from "./pokedox-routing.module";
   ],
   imports: [
     CommonModule,
-    PokedoxRoutingModule
+    PokedoxRoutingModule,
+    SharedModule
   ]
 })
 export class PokedoxModule { }

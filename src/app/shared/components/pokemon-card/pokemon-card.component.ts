@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pokemon, PokemonType } from "../../models/pokemon.models";
+import {PokedoxService} from "../../services/pokedox.service";
 
 @Component({
   selector: 'pk-pokemon-card',
@@ -9,8 +10,10 @@ import { Pokemon, PokemonType } from "../../models/pokemon.models";
 export class PokemonCardComponent implements OnInit {
 
   @Input() pokemon!: Pokemon
+  @Input() inPokedox!: boolean | null
+
   types:string =""
-  constructor() { }
+  constructor(private pokedoxservice:PokedoxService) { }
 
   getTypes(pokemonTypes: PokemonType[]): string {
     return pokemonTypes.map(t=>t.type.name).join(' ')
@@ -20,4 +23,11 @@ export class PokemonCardComponent implements OnInit {
     this.types=this.getTypes(this.pokemon.types)
   }
 
+  removeFromPokedox(id: number) {
+    this.pokedoxservice.removeFromPokedox(id)
+  }
+
+  addToPokedox(id: number) {
+    this.pokedoxservice.addInPokedox(id)
+  }
 }

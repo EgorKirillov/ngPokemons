@@ -2,9 +2,8 @@
 <div *ngIf="pokemons$ | async as pokemons" class="card-container">
 
   <div *ngFor="let pokemon of pokemons" >
-    <pk-pokemon-card [pokemon]="pokemon"></pk-pokemon-card>
+    <pk-pokemon-card *ngIf="inPokedox(pokemon.id) !== null" [pokemon]="pokemon" [inPokedox]="inPokedox(pokemon.id) | async"></pk-pokemon-card>
   </div>
-
 </div>
 
 <mat-paginator

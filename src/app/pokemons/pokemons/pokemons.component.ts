@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from "rxjs";
+import {map, Observable, Subscription} from "rxjs";
 import { PokemonsService } from "../../shared/services/pokemons.service";
 import { PageEvent } from "@angular/material/paginator";
 import { Pokemon } from 'src/app/shared/models/pokemon.models';
 import { QueryParams } from "../../shared/models/queryParams.models";
 import { ActivatedRoute, Params, Router } from "@angular/router";
+import {PokedoxService} from "../../shared/services/pokedox.service";
 
 @Component({
   selector: 'pk-pokemons',
@@ -25,6 +26,12 @@ export class PokemonsComponent implements OnInit, OnDestroy {
 
   pageSizeOptions = [5, 10, 20, 50];
 
+  pokedox$!:Observable<number[]>
+
+  inPokedox(id:number):Observable<boolean> {
+    return this.pokedox$.pipe(map(pokedox=>pokedox.findIndex(pokedox=>id===pokedox)>-1))
+  }
+
 
   handlePageEvent(event: PageEvent) {
     const params: QueryParams = {
@@ -34,12 +41,13 @@ export class PokemonsComponent implements OnInit, OnDestroy {
     this.router.navigate(['/pokemons'], {queryParams: params})
   }
 
-  constructor(private pokemonsService: PokemonsService, private route: ActivatedRoute, private router: Router) {
+  constructor(private pokemonsService: PokemonsService, private route: ActivatedRoute, private router: Router, private pokedoxservice:PokedoxService) {
     this.pokemonPageIndex$ = this.pokemonsService.pokemonPageIndex$
     this.pokemonsCount$ = this.pokemonsService.pokemonCount$
     this.pokemonPageSize$ = this.pokemonsService.pokemonPageSize$
     this.isLoading$ = this.pokemonsService.isLoading$
     this.pokemons$ = this.pokemonsService.pokemons$
+    this.pokedox$ = this.pokedoxservice.pokedox$
   }
 
   ngOnInit(): void {
