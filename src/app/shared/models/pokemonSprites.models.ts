@@ -1,7 +1,7 @@
 
 export interface PokemonSprites {
-  front_default:string
-  front_shiny:string
+  front_default:string  | null
+  front_shiny:string  | null
   front_female:string
   front_shiny_female:string
   back_default:string
