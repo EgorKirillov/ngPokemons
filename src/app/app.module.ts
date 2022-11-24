@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { PokemonsModule } from "./pokemons/pokemons.module";
 import { PokemonModule } from "./pokemon/pokemon.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {PokedoxModule} from "./pokedox/pokedox.module";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     PokemonsModule,
     PokemonModule,
+    PokedoxModule,
     HttpClientModule,
     BrowserAnimationsModule,
   ],
