@@ -2,17 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {PokemonCardComponent} from "./components/pokemon-card/pokemon-card.component";
 import {MatCardModule} from "@angular/material/card";
-import {RouterLinkWithHref} from "@angular/router";
+import {RouterLinkActive, RouterLinkWithHref} from "@angular/router";
+import { HeaderComponent } from './components/header/header.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
 @NgModule({
-  declarations: [PokemonCardComponent],
-  exports:[PokemonCardComponent],
+  declarations: [PokemonCardComponent, HeaderComponent],
+  exports: [PokemonCardComponent, HeaderComponent],
   imports: [
     CommonModule,
     MatCardModule,
     RouterLinkWithHref,
+    MatTabsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterLinkActive,
 
   ]
 })

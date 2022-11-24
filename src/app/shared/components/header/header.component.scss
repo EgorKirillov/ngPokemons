@@ -1,0 +1,14 @@
+.link {
+  display: inline-block;
+  min-width: 150px;
+  width: auto;
+  padding: 12px;
+  margin: 20px 20px 0;
+  border: black solid 2px;
+  border-radius: 5px;
+  text-align: center;
+}
+.active-link{
+  background: grey;
+  color: bisque;
+}

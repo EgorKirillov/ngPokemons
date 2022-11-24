@@ -8,6 +8,7 @@ import { PokemonsModule } from "./pokemons/pokemons.module";
 import { PokemonModule } from "./pokemon/pokemon.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {PokedoxModule} from "./pokedox/pokedox.module";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {PokedoxModule} from "./pokedox/pokedox.module";
     PokedoxModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
